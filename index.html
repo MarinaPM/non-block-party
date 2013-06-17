@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>A/NB standups</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/DT_bootstrap.css">
+  
+</head>
+<body>
+
+  <script type="text/x-handlebars">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <a class="brand" href="">{{title}} {{appName}}</a>
+        <ul class="nav">
+          <li>{{#linkTo 'dashboards'}}Dashboard{{/linkTo}}</li>
+          <li>{{#linkTo 'posts'}}View Status Updates{{/linkTo}}</li>
+        </ul>
+      </div>
+    </div>
+
+    {{view.message}}
+
+    {{outlet}}
+
+  </script>
+
+   
+
+  <script type="text/x-handlebars" id="posts">
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span10">
+
+       
+
+  <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>User</th>
+      <th>Status</th>
+      <th> What did you work on today?</th>
+      <th> What do you plan to work on tomorrow?</th>
+      <th>  What barriers, questions, or issues are you facing?</th>
+    </tr>
+  </thead>
+  <tbody>
+
+     {{#each controller}}
+     <tr class="odd gradeX">
+          <td><a href=""> {{#linkTo 'dashboard' this}}{{date}}{{/linkTo}}</a></td>
+          <td>{{user}}</td>
+          <td><span class="label">{{status}}</span></td>
+          <td class="center">{{today}}</td>
+          <td class="center">{{tomorrow}}</td>
+          <td class="center">{{questions}}</td>
+
+      </tr>
+      {{/each}}
+
+   
+    <tr class="even gradeC">
+      <td>11.06.2013</td>
+      <td>User 2</td>
+      <td><span class="label label-important">Red</span></td>
+      <td class="center">5</td>
+      <td class="center">C</td>
+      <td class="center">X</td>
+    </tr>
+    <tr class="odd gradeA">
+      <td>11.06.2013</td>
+      <td>User 3</td>
+      <td><span class="label label-warning">Yellow</span></td>
+      <td class="center">5.5</td>
+      <td class="center">A</td>
+      <td class="center">X</td>
+    </tr>
+   
+  </tbody>
+</table>
+
+
+    
+        </div>
+        
+      </div>
+    </div>
+  </script>
+
+
+  <script type="text/x-handlebars" id="createStatus" data-template-name='createStatus'>
+    {{test}}
+
+   <form class="form-horizontal">
+    <fieldset>
+
+    <!-- Form Name -->
+    <legend>Enter your status update:</legend>
+
+    <!-- Select Basic -->
+    <div class="control-group">
+      <label class="control-label">What is your status?</label>
+      <div class="controls">
+        {{view Ember.Select contentBinding="App.statuses.content"
+              valueBinding="status"
+            }}
+
+      </div>
+    </div>
+
+    <!-- Textarea -->
+    <div class="control-group">
+      <label class="control-label">What did you work on today? </label>
+      <div class="controls">                     
+        {{view Ember.TextArea valueBinding='today'}}
+      </div>
+
+      
+
+    </div>
+
+    <!-- Textarea -->
+    <div class="control-group">
+      <label class="control-label">What do you plan to work on tomorrow? </label>
+      <div class="controls">                     
+        {{view Ember.TextArea valueBinding='tomorrow'}}
+      </div>
+    </div>
+
+    <!-- Textarea -->
+    <div class="control-group">
+      <label class="control-label">What barriers, questions, or issues are you facing?</label>
+      <div class="controls">                     
+        {{view Ember.TextArea valueBinding='modelquestions'}}
+      </div>
+    </div> 
+
+    <!-- Button (Double) -->
+    <div class="control-group">
+      <label class="control-label"></label>
+      <div class="controls">
+        <button id="button1id" {{action 'clearPost' context="post" target="controller"}} name="button1id" class="btn btn-danger">Reset</button>
+
+        <button {{action 'createPost' model}} id="button2id" name="button2id" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+
+    </fieldset>
+    </form>
+  </script>
+
+   <script type="text/x-handlebars" id="status/_update">
+   </script>
+  
+  <script type="text/x-handlebars" id="dashboards">
+
+    <!--{{partial 'status/update'}}-->
+
+    {{view StatusFormView}}
+
+    
+
+
+    <button class='btn'
+          {{action viewAsTable}}
+          {{bindAttr disabled="viewingTable"}}>View as Table</button>
+
+  <button class='btn'
+          {{action viewAsBarChart}}
+          {{bindAttr disabled="viewingBarChart"}}>View as Bar Chart</button>
+
+  
+  
+   
+
+    
+
+  </script>
+
+  <script src="js/libs/jquery-1.9.1.js"></script>
+  <script src="js/libs/handlebars-1.0.0-rc.3.js"></script>
+  <script src="js/libs/ember-1.0.0-master.js"></script>
+  <script src="js/libs/ember-data-master.js"></script>
+  <script src="js/libs/showdown.js"></script>
+  <script src="js/libs/moment.js"></script>
+  <script src="js/app.js"></script>
+
+  <script src="js/jquery.tablesorter.min.js"></script>
+  <script >
+    $(function() {
+      $("table#example").tablesorter({ sortList: [[1,0]] });
+    });
+  </script>
+
+  <!--<script type="text/javascript" charset="utf-8" language="javascript" src="js/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf-8" language="javascript" src="js/DT_bootstrap.js"></script>-->
+
+</body>
+</html>
+

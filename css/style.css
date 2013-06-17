@@ -1,0 +1,47 @@
+/* Put your CSS here */
+html, body {
+    margin: 20px;
+}
+
+a {
+  cursor: pointer;
+}
+
+.navbar .nav > li > a.active {
+  color: black;
+  font-weight: bold;
+}
+
+.about {
+  padding-bottom: 15px;
+  width: 700px;
+}
+
+.about + .about {
+  padding-top: 25px;
+  border-top: 1px solid #000;
+}
+
+.yellow {
+  background-color: #b94a48;
+}
+
+.yellow[href] {
+  background-color: #953b39;
+}
+
+.label-warning {
+  background-color: #f89406;
+}
+
+.label-warning[href] {
+  background-color: #c67605;
+}
+
+.label-success {
+  background-color: #468847;
+}
+
+.label-success[href] {
+  background-color: #356635;
+}
